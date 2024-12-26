@@ -19,4 +19,6 @@ public interface JugadorService {
      * @return Lista ordenada de jugadores.
      */
     List<Jugador> obtenerJugadoresOrdenadosPorGoles();
+
+    boolean create(Jugador toCreate);
 }

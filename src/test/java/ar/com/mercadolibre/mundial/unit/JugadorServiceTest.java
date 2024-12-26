@@ -3,18 +3,21 @@ package ar.com.mercadolibre.mundial.unit;
 import ar.com.mercadolibre.mundial.models.Jugador;
 import ar.com.mercadolibre.mundial.repository.JugadorRepository;
 import ar.com.mercadolibre.mundial.services.impl.JugadorServiceImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -26,7 +29,7 @@ class JugadorServiceTest {
     @InjectMocks
     private JugadorServiceImpl jugadorService;
 
-    @BeforeEach
+    //@BeforeEach
     void setUp() {
         List<Jugador> jugadoresMock = Arrays.asList(
                 new Jugador(1, "Lionel Messi", "Argentina", 91),
@@ -111,4 +114,24 @@ class JugadorServiceTest {
         assertTrue(jugadores.stream().anyMatch(j -> j.getNombre().equals("Kylian Mbappé")),
                 "La lista debería contener a Kylian Mbappé");
     }
+
+    @Test
+    @DisplayName("TEST CREATE OK")
+    public void createOK(){
+        //ARRANGE
+        Jugador toCreate = new Jugador(
+                22,
+                "Ronaldo Nazario",
+                "Brazil",
+                129
+        );
+        Mockito.when(jugadorRepository.create(toCreate)).thenReturn(true);
+        //ACT
+        boolean receivedResponse = jugadorService.create(toCreate);
+        //ASSERT
+        Assertions.assertTrue(receivedResponse);
+        Mockito.verify(jugadorRepository, atLeastOnce()).create(toCreate);
+
+    }
+
 }

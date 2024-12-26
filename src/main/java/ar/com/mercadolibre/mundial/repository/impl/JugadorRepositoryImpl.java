@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class JugadorRepositoryImpl implements JugadorRepository {
     @Value("${jugadores.json.path}")
     private String jugadoresJsonPath;
 
+    private List<Jugador> jugadoresList = new ArrayList<>();
+
     @Override
     public List<Jugador> cargarJugadores() {
         try (InputStream inputStream = getClass().getResourceAsStream(jugadoresJsonPath)) {
@@ -34,5 +37,26 @@ public class JugadorRepositoryImpl implements JugadorRepository {
             e.printStackTrace();
             return Collections.emptyList();
         }
+    }
+
+    @Override
+    public boolean create(Jugador toCreate) {
+        jugadoresList.add(toCreate);
+        return true;
+    }
+
+    @Override
+    public Jugador read(int toRead) {
+        return null;
+    }
+
+    @Override
+    public boolean update(Jugador toUpdate) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(int toDelete) {
+        return false;
     }
 }

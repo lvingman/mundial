@@ -28,4 +28,9 @@ public class JugadorServiceImpl implements JugadorService {
         jugadores.sort(Comparator.comparingInt(Jugador::getGoles).reversed());
         return jugadores;
     }
+
+    @Override
+    public boolean create(Jugador toCreate) {
+        return jugadorRepository.create(toCreate);
+    }
 }

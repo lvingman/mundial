@@ -11,12 +11,8 @@ import java.util.List;
 @Service
 public class JugadorServiceImpl implements JugadorService {
 
-    private final JugadorRepository jugadorRepository;
-
     @Autowired
-    public JugadorServiceImpl(JugadorRepository jugadorRepository) {
-        this.jugadorRepository = jugadorRepository;
-    }
+    JugadorRepository jugadorRepository;
 
     @Override
     public Jugador obtenerJugadorPorId(int id) {

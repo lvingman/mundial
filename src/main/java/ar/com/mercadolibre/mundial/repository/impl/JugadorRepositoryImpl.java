@@ -16,12 +16,12 @@ public class JugadorRepositoryImpl implements JugadorRepository {
 
     private final ObjectMapper objectMapper;
 
-    @Value("${jugadores.json.path}")
-    private String jugadoresJsonPath;
-
     public JugadorRepositoryImpl(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
+
+    @Value("${jugadores.json.path}")
+    private String jugadoresJsonPath;
 
     @Override
     public List<Jugador> cargarJugadores() {
